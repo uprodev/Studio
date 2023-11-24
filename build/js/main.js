@@ -107,8 +107,8 @@ jQuery(document).ready(function ($) {
   if ($(".project-slider").length) {
     var swiperThumb = new Swiper(".swiper1", {
       loop: true,
-      spaceBetween: 15,
-      slidesPerView: 2,
+      spaceBetween: 10,
+      slidesPerView: 3,
       freeMode: true,
       watchSlidesProgress: true,
       breakpoints: {
