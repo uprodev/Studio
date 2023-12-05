@@ -15,6 +15,9 @@ jQuery(document).ready(function ($) {
       loop: true,
       slidesPerView: 1,
       spaceBetween: 20,
+      autoplay: {
+        delay: 3000,
+      },
       pagination: {
         el: ".cp-image-slider .swiper-pagination",
         clickable: true,
@@ -139,5 +142,19 @@ jQuery(document).ready(function ($) {
     default_offset_pct: 0.5,
     before_label: "BEFORE",
     after_label: "AFTER",
+  });
+
+  var $gridModule = $(".filter-grid").isotope({
+    itemSelector: ".filter-grid .grid-item",
+    layoutMode: "fitRows",
+    fitRows: {
+      equalheight: true,
+    },
+  });
+  $(".cp-filter button").on("click", function () {
+    $(".cp-filter button.active").removeClass("active");
+    $(this).addClass("active");
+    var filterValue = $(this).attr("data-filter");
+    $gridModule.isotope({ filter: filterValue });
   });
 });
