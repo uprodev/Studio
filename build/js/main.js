@@ -1,7 +1,26 @@
 jQuery(document).ready(function ($) {
+  $(".navigation-main li").each(function () {
+    if ($(this).find("ul").length) {
+      $(this).addClass("parent");
+    }
+  });
+
+  $(".navigation-main .parent a").on("click", function (e) {
+    if ($(window).width() >= 1024) {
+      return;
+    }
+
+    var $li = $(this).parent("li");
+    if (!$li.hasClass("opened")) {
+      e.preventDefault();
+      $li.addClass("opened").find("ul").slideDown(200);
+    }
+  });
+
   $(".navbar-toggler").on("click", function () {
     $(this).toggleClass("active");
     $(".navigation-main").toggleClass("active");
+    $(".navigation-main .opened").removeClass("opened").find("ul").slideUp(200);
   });
 
   $(".block-hero .scroll-down").on("click", function (e) {
@@ -17,6 +36,7 @@ jQuery(document).ready(function ($) {
       spaceBetween: 20,
       autoplay: {
         delay: 3000,
+        disableOnInteraction: false,
       },
       pagination: {
         el: ".cp-image-slider .swiper-pagination",
@@ -157,4 +177,50 @@ jQuery(document).ready(function ($) {
     var filterValue = $(this).attr("data-filter");
     $gridModule.isotope({ filter: filterValue });
   });
+
+  function getUrlVars() {
+    var vars = [],
+      hash;
+    if (window.location.href.indexOf("?") !== -1) {
+      var hashes = window.location.href.slice(window.location.href.indexOf("?") + 1).split("&");
+      for (var i = 0; i < hashes.length; i++) {
+        hash = hashes[i].split("=");
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+      }
+    }
+    return vars;
+  }
+
+  var filters = getUrlVars();
+  if (filters.length > 0) {
+    var $fl = getUrlVars()["filter"];
+    $gridModule.isotope({ filter: $fl });
+    $(".cp-filter button.active").removeClass("active");
+    $('.cp-filter button[data-filter="' + $fl + '"]').addClass("active");
+  } else {
+    if ($(".cp-filter").length) {
+      $gridModule.isotope({ filter: ".all" });
+    }
+  }
 });
+
+function initMap() {
+  if (document.getElementById("map")) {
+    var mapContainer = document.getElementById("map");
+    var mapCenter = {
+      lat: parseFloat(mapContainer.getAttribute("data-lat")),
+      lng: parseFloat(mapContainer.getAttribute("data-lng")),
+    };
+    map = new google.maps.Map(document.getElementById("map"), {
+      center: mapCenter,
+      zoom: 17,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      disableDefaultUI: true,
+    });
+    const marker = new google.maps.Marker({
+      map: map,
+      position: mapCenter,
+    });
+  }
+}
