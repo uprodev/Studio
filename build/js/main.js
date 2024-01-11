@@ -203,6 +203,17 @@ jQuery(document).ready(function ($) {
       $gridModule.isotope({ filter: ".all" });
     }
   }
+
+  var $rowModule = $(".filter-rows").isotope({
+    itemSelector: ".filter-rows .item",
+    layoutMode: "vertical",
+  });
+  $(".cp-filter-blog button").on("click", function () {
+    $(".cp-filter-blog button.active").removeClass("active");
+    $(this).addClass("active");
+    var filterValue = $(this).attr("data-filter");
+    $rowModule.isotope({ filter: filterValue });
+  });
 });
 
 function initMap() {
