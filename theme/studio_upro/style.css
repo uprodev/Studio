@@ -1,0 +1,39 @@
+/*   
+Theme Name: Studio
+*/
+
+.header .navigation-main ul li.current-menu-item > a {
+    text-decoration: underline;
+}
+.cp-filter a{
+    text-decoration: none;
+}
+.cp-filter a.active {
+    font-weight: 600;
+    color: #094875;
+    -webkit-text-decoration-line: underline;
+    text-decoration-line: underline;
+}
+ul.page-numbers {
+    display: flex;
+    justify-content: center;
+    padding: 30px 0 0;
+    list-style: none;
+}
+ul.page-numbers li > * {
+    position: relative;
+    display: block;
+    padding: var(--bs-pagination-padding-y) var(--bs-pagination-padding-x);
+    font-size: var(--bs-pagination-font-size);
+    color: var(--bs-pagination-color);
+    text-decoration: none;
+    background-color: var(--bs-pagination-bg);
+    border: var(--bs-pagination-border-width) solid var(--bs-pagination-border-color);
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+ul.page-numbers li > span {
+    z-index: 3;
+    color: var(--bs-pagination-active-color);
+    background-color: var(--bs-pagination-active-bg);
+    border-color: var(--bs-pagination-active-border-color);
+}
