@@ -214,6 +214,12 @@ jQuery(document).ready(function ($) {
     var filterValue = $(this).attr("data-filter");
     $rowModule.isotope({ filter: filterValue });
   });
+  $rowModule.isotope({ filter: ".all" });
+
+  $(".wp-block-gallery").each(function () {
+    var gallerySize = $(this).find("figure").length;
+    $(this).addClass("wp-block-gallery--items" + gallerySize);
+  });
 });
 
 function initMap() {
